@@ -59,7 +59,7 @@ export async function toMastodonStatusFromObject(
 	const actorId = new URL(obj[originalActorIdSymbol])
 	const actor = await actors.getAndCache(actorId, db)
 
-	const acct = urlToHandle(actorId)
+	const acct = urlToHandle(actorId, actor.preferredUsername)
 	const account = await loadExternalMastodonAccount(acct, actor)
 
 	// FIXME: temporarly disable favourites and reblogs counts
@@ -122,7 +122,7 @@ export async function toMastodonStatusFromRow(domain: string, db: Database, row:
 		properties: row.actor_properties,
 	})
 
-	const acct = urlToHandle(actorId)
+	const acct = urlToHandle(actorId, author.preferredUsername)
 	const account = await loadExternalMastodonAccount(acct, author)
 
 	if (row.favourites_count === undefined || row.reblogs_count === undefined || row.replies_count === undefined) {
@@ -171,8 +171,8 @@ export async function toMastodonStatusFromRow(domain: string, db: Database, row:
 		// as the object has been attributed to. Likely means it's a reblog.
 
 		const actorId = new URL(properties.attributedTo)
-		const acct = urlToHandle(actorId)
 		const author = await actors.getAndCache(actorId, db)
+		const acct = urlToHandle(actorId, author.preferredUsername)
 		const account = await loadExternalMastodonAccount(acct, author)
 
 		// Restore reblogged status

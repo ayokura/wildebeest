@@ -45,7 +45,7 @@ export async function handleRequest(
 		throw new Error('unknown from actor')
 	}
 
-	const acct = urlToHandle(from_actor_id)
+	const acct = urlToHandle(from_actor_id, fromActor.preferredUsername)
 	const fromAccount = await loadExternalMastodonAccount(acct, fromActor)
 
 	const out: Notification = {
