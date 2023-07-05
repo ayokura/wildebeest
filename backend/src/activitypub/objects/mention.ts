@@ -9,6 +9,6 @@ export function newMention(actor: Actor): Mention {
 	return {
 		type: 'Mention',
 		href: actor.id,
-		name: urlToHandle(actor.id),
+		name: urlToHandle(actor.id, actor.preferredUsername),
 	}
 }

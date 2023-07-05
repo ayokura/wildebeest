@@ -80,7 +80,7 @@ export async function handleRequestDelete(
 	if (status === null) {
 		return errors.statusNotFound(id)
 	}
-	if (status.account.id !== urlToHandle(connectedActor.id)) {
+	if (status.account.id !== urlToHandle(connectedActor.id, connectedActor.preferredUsername)) {
 		return errors.statusNotFound(id)
 	}
 
