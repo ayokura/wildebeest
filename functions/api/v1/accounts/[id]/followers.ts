@@ -68,10 +68,10 @@ async function getLocalFollowers(request: Request, handle: Handle, db: Database)
 
 	for (let i = 0, len = followers.length; i < len; i++) {
 		const id = new URL(followers[i])
-		const acct = urlToHandle(id)
 
 		try {
 			const actor = await actors.getAndCache(id, db)
+			const acct = urlToHandle(id, actor.preferredUsername)
 			out.push(await loadExternalMastodonAccount(acct, actor))
 		} catch (err: any) {
 			console.warn(`failed to retrieve follower (${id}): ${err.message}`)

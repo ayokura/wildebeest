@@ -75,7 +75,7 @@ export async function handleRequest(db: Database, request: Request): Promise<Res
 				for (let i = 0, len = results.length; i < len; i++) {
 					const row: any = results[i]
 					const actor = personFromRow(row)
-					const acct = urlToHandle(new URL(row.id))
+					const acct = urlToHandle(new URL(row.id), actor.preferredUsername)
 					out.accounts.push(await loadExternalMastodonAccount(acct, actor))
 				}
 			}

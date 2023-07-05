@@ -64,7 +64,7 @@ describe('utils', () => {
 	})
 
 	test('URL to handle', async () => {
-		const res = urlToHandle(new URL('https://host.org/users/foobar'))
+		const res = urlToHandle(new URL('https://host.org/users/foobar'), undefined)
 		assert.equal(res, 'foobar@host.org')
 	})
 
