@@ -68,6 +68,11 @@ describe('utils', () => {
 		assert.equal(res, 'foobar@host.org')
 	})
 
+	test('URL to handle with username', async () => {
+		const res = urlToHandle(new URL('https://host.org/users/foobar'), 'baz123')
+		assert.equal(res, 'baz123@host.org')
+	})
+
 	test('read body handles JSON', async () => {
 		const body = JSON.stringify({ a: 1 })
 		const headers = {

@@ -35,7 +35,7 @@ export function enrichStatus(status: string, mentions: Array<Actor>): string {
 		.replace(mentionedEmailRegex, (_, matchPrefix: string, email: string, matchSuffix: string) => {
 			// ensure that the match is part of the mentions array
 			for (let i = 0, len = mentions.length; i < len; i++) {
-				if (email === urlToHandle(mentions[i].id)) {
+				if (email === urlToHandle(mentions[i].id, mentions[i].preferredUsername)) {
 					return `${matchPrefix}${getMentionSpan(email)}${matchSuffix}`
 				}
 			}

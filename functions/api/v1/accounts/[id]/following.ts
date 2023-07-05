@@ -46,7 +46,7 @@ async function getRemoteFollowing(request: Request, handle: Handle, db: Database
 	const following = await loadActors(db, followingIds)
 
 	const promises = following.map((actor) => {
-		const acct = urlToHandle(actor.id)
+		const acct = urlToHandle(actor.id, actor.preferredUsername)
 		return loadExternalMastodonAccount(acct, actor, false)
 	})
 
