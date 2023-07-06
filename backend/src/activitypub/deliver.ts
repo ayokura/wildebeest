@@ -21,6 +21,7 @@ export async function deliverToActor(
 ) {
 	const headers = {
 		Accept: 'application/ld+json; profile="https://www.w3.org/ns/activitystreams"',
+		'Content-Type': 'application/activity+json',
 		'User-Agent': getFederationUA(domain),
 	}
 
