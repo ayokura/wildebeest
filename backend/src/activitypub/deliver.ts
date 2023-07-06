@@ -33,7 +33,12 @@ export async function deliverToActor(
 	})
 	const digest = await generateDigestHeader(body)
 	req.headers.set('Digest', digest)
-	await signRequest(req, signingKey, new URL(from.id))
+
+	const keyId = new URL(from.id)
+	if (keyId.hostname == domain) {
+		keyId.hash = '#main-key'
+	}
+	await signRequest(req, signingKey, keyId)
 
 	const res = await fetch(req)
 	if (!res.ok) {
