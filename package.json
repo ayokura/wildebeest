@@ -54,6 +54,7 @@
 		"pre-commit": "yarn lint"
 	},
 	"volta": {
-		"node": "20.4.0"
+		"node": "18.16.1",
+		"yarn": "1.22.19"
 	}
 }

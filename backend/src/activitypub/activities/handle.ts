@@ -250,6 +250,7 @@ export async function handle(
 				// Automatically send the Accept reply
 				await acceptFollowing(db, originalActor, receiver)
 				const reply = accept.create(receiver, activity)
+				console.log({ reply, activity })
 				const signingKey = await getSigningKey(userKEK, db, receiver)
 				await deliverToActor(signingKey, receiver, originalActor, reply, domain)
 
