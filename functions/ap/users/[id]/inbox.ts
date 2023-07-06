@@ -38,6 +38,7 @@ export const onRequest: PagesFunction<Env, any> = async ({ params, request, env 
 	}
 
 	const activity: Activity = JSON.parse(body)
+	console.log(`activity: ${body}`)
 	const domain = new URL(request.url).hostname
 	return handleRequest(
 		domain,
@@ -70,6 +71,8 @@ export async function handleRequest(
 	if (actor === null) {
 		return new Response('', { status: 404 })
 	}
+
+	console.log({ actor, activity })
 
 	await queue.send({
 		type: MessageType.Inbox,
